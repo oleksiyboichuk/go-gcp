@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/joho/godotenv"
 )
@@ -18,8 +19,14 @@ func LoadConfig() *Config {
 		fmt.Println("WARNING: No config found!")
 	}
 
+	port := getEnv("PORT", ":8080")
+
+	if !strings.HasPrefix(port, ":") {
+		port = ":" + port
+	}
+
 	return &Config{
-		Port:      getEnv("PORT", ":8080"),
+		Port:      port,
 		JWTSecret: getEnv("JWT_SECRET", "dummy"),
 	}
 }

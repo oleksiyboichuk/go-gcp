@@ -11,7 +11,7 @@ import (
 func main() {
 	cfg := config.LoadConfig()
 	router := gin.Default()
-	routes.SetupRoutes(router)
+	routes.SetupRoutes(router, cfg)
 
 	fmt.Printf("Starting server on port %s", cfg.Port)
 	router.Run(cfg.Port)
